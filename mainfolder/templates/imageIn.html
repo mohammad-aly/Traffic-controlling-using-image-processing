@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /*set border to the form*/
+      body {
+  background-color: #ffffffff;
+  padding-top: 50px;
+  background-color: #ffffffff;
+  text-align: center;
+  padding-top: 50px;
+  background-color: #ffffffff;
+  padding-top: 10px;
+  background-image: url("static/images/bg.jpg"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+    /*assign full width inputs*/
+      
+    input[type=text] ,
+    input[type=tel] ,
+    input[type=file]
+    {
+        width: 65%;
+        height: 40%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid rgb(41, 38, 38);
+    }
+
+
+
+    
+button {
+  width: 140px;
+  height: 35px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+button:active {
+  transform: translateY(3px);
+}
+.home {
+        background-color: #af744c;
+        cursor: pointer;
+        width: 15%;
+        position: sticky;
+        left: 100%;
+        
+    }
+.home:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+.home:active {
+  transform: translateY(3px);
+}
+label{
+    color: blue;
+    font-size: large;
+}
+
+
+.container {
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin-block: 2rem;
+  gap: 2rem;
+  }
+    .card {
+        display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+/* background: linear-gradient(to right, #FFFFFF, #ECE9E6); */
+
+    }
+      .face {
+        padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .10rem;
+      }
+      .face2 {
+          transition: 0.5s;
+        }
+
+        .face.face2 {
+      background-image: linear-gradient(
+        40deg,
+        #00fffc 0%,
+        #fc00ff 45%,
+        #fffc00 100%
+      );
+      border-radius: 15px;
+    }
+    .img {
+      width: 99%;
+      height: 99%;
+      object-fit: cover;
+      transform-origin: center;
+      transition: 0.5s;
+      border-radius: 10px;
+          }
+
+          h1{
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-transform: inherit;
+  color: blue;
+
+
+}
+#input_box{
+   border: 3px solid rgb(104, 162, 189);
+   width: fit-content;
+
+}
+</style>
+  
+<body>
+    
+   <center>
+    <div>   
+      <h1>Vehicle Congestion Under Controller using Image Segmentation</h1>
+        <a href="/">
+        <button href="#" class="home">HOME</button>
+        </a>
+        <br>
+        <br>
+        <a href="/form">
+            <button href="#" class="home">RELOAD</button>
+            </a>
+            <br>
+
+       
+<div id="container">
+    <form method="POST" action="/form" enctype="multipart/form-data">
+        
+            <div id="input_box">
+            <label for="">Road 1 :</label>
+            <input type="file" id="myfile1" name="testImage " accept="image/*" required>
+          </div>
+            <br>
+            <div id="input_box">
+            <label for="">Road 2 :</label>
+            <input type="file" id="myfile2" name="testImage " accept="image/*" required>
+          </div>
+            <br>
+            <div id="input_box">
+            <label for="">Road 3 :</label>
+            <input type="file" id="myfile3" name="testImage " accept="image/*" required>
+          </div>
+            <br>
+            <div id="input_box">
+            <label for="">Road 4 :</label>
+            <input type="file" id="myfile4" name="testImage " accept="image/*" required>
+          </div>
+            <br>
+            <br>
+            <button type="button" onclick="upload()">UPLOAD</button>
+        
+        </form>
+        </div>
+    <br>
+    <br>
+</div>
+</center>
+ 
+</body>  
+<script>
+    function upload() {
+        var file1 = document.getElementById("myfile1").files[0];
+        var file2 = document.getElementById("myfile2").files[0];
+        var file3 = document.getElementById("myfile3").files[0];
+        var file4 = document.getElementById("myfile4").files[0];
+
+        if(file1 == null ||file2 == null ||file3 == null ||file4 == null){
+            alert("Please select a file");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("Image1", file1);
+        formData.append("Image2", file2);
+        formData.append("Image3", file3);
+        formData.append("Image4", file4);
+        document.getElementById("container").innerHTML = "Predicting...";
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/form", true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // console.log(xhr.responseText);
+                var Djson = JSON.parse(xhr.responseText);
+                if (Djson["status"] == "0"){
+                var cont = document.getElementById("container");
+                cont.innerHTML ="" ;
+                cont.setAttribute("class","container");
+                var imageList = Djson["image"];
+                var v_count = Djson["vcl"];
+                
+                console.log(Djson);
+                console.log(imageList);
+                for(var i=0;i<4;i++){
+                    console.log(imageList[i]);
+                    var cardDiv = document.createElement("div");
+                    var img = document.createElement("img");
+                    var imgDiv = document.createElement("div")
+                    cardDiv.setAttribute("class","card");
+                    cardDiv.innerHTML = "ROAD : "+(i+1);
+                    img.setAttribute("class","img");
+                    imgDiv.setAttribute("class","face face1");
+                    imgDiv.innerHTML = " Count :"+v_count[i];
+                    img.src = imageList[i]
+                    if(i == Djson["vl"]){
+                        cardDiv.setAttribute("style"," background: red;");
+                    }
+                    else{
+                      // cardDiv.setAttribute("style"," background: green;");
+                      ;
+                    }
+                    imgDiv.appendChild(img);
+                    cardDiv.appendChild(imgDiv);
+                    cont.appendChild(cardDiv);
+                }
+
+                ;
+                // console(json);
+                }
+
+            }
+        }
+        xhr.send(formData);
+
+
+        //clear the file input
+        document.getElementById("myfile1").value = "";
+        document.getElementById("myfile2").value = "";
+        document.getElementById("myfile3").value = "";
+        document.getElementById("myfile4").value = "";
+        
+        
+    }
+</script>
+</html>

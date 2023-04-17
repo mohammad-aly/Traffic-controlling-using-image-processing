@@ -1,0 +1,96 @@
+<html>
+<head>
+</head>
+<style>
+body {
+  background-color: rgb(235, 242, 245);
+  padding-top: 10px;
+  background-color: #ffffffff;
+  text-align: center;
+  padding-top: 50px;
+  background-color: #ffffffff;
+  padding-top: 10px;
+  background-image: url("static/images/bg.jpg"); 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+}
+h1 {
+  color:blue
+  
+}
+#image{
+  border-radius: 2%;
+  border-color: green;
+  box-sizing: border-box;
+  height: 70%;
+  width: 75%;
+  box-shadow: rgb(236, 4, 120);
+  box-shadow: #644848;
+  object-fit: cover;
+  box-shadow: 10px 15px 25px 0 rgba(0,0,0,.2);
+  transition: all .5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  image-resolution: from-image;
+}
+#image1{
+  border-radius: 5%;
+  border-color: green;
+  box-sizing: border-box;
+  height: 25%;
+  width: 20%;
+  box-shadow: hotpink;
+}
+
+button {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+button:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+#gif{
+  border-radius: 10%;
+  height: 25%;
+  width: 30%;
+}
+</style>
+<body> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div style="text-align:center">
+<span">
+<h1>Vehicle Congestion Under Controller using Image Segmentation</h1>
+    <br>
+    <br>
+    <div>
+    <h1><img id="image" src="{{ url_for('video_feed') }}" width="50%"></h1>
+    </div>
+	<br>
+    <br>
+    <a href="/">
+        <button href="#" class="button1">HOME</button>
+    </a>
+</span>
+</body>
+<script>
+
+</script>
+</html>
